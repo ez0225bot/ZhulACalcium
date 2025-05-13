@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>Grapher.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #2aacb8;}
+.s5 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Grapher.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">List</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">Grapher </span><span class="s0">extends </span><span class="s1">JPanel </span><span class="s2">{</span>
+    <span class="s0">private </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Integer</span><span class="s2">&gt; </span><span class="s1">values</span><span class="s2">; </span><span class="s3">// Data points to graph</span>
+
+    <span class="s0">public </span><span class="s1">Grapher</span><span class="s2">(</span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Integer</span><span class="s2">&gt; </span><span class="s1">values</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">values </span><span class="s2">= </span><span class="s1">values</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">paintComponent</span><span class="s2">(</span><span class="s1">Graphics g</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">paintComponent</span><span class="s2">(</span><span class="s1">g</span><span class="s2">);</span>
+        <span class="s1">Graphics2D g2 </span><span class="s2">= (</span><span class="s1">Graphics2D</span><span class="s2">) </span><span class="s1">g</span><span class="s2">;</span>
+
+        <span class="s0">int </span><span class="s1">width </span><span class="s2">= </span><span class="s1">getWidth</span><span class="s2">();</span>
+        <span class="s0">int </span><span class="s1">height </span><span class="s2">= </span><span class="s1">getHeight</span><span class="s2">();</span>
+        <span class="s0">int </span><span class="s1">padding </span><span class="s2">= </span><span class="s4">40</span><span class="s2">; </span><span class="s3">// Space for axis labels</span>
+
+        <span class="s3">// Draw Axes</span>
+        <span class="s1">g2</span><span class="s2">.</span><span class="s1">setColor</span><span class="s2">(</span><span class="s1">Color</span><span class="s2">.</span><span class="s1">BLACK</span><span class="s2">);</span>
+        <span class="s1">g2</span><span class="s2">.</span><span class="s1">drawLine</span><span class="s2">(</span><span class="s1">padding</span><span class="s2">, </span><span class="s1">height </span><span class="s2">- </span><span class="s1">padding</span><span class="s2">, </span><span class="s1">width </span><span class="s2">- </span><span class="s1">padding</span><span class="s2">, </span><span class="s1">height </span><span class="s2">- </span><span class="s1">padding</span><span class="s2">); </span><span class="s3">// X-axis</span>
+        <span class="s1">g2</span><span class="s2">.</span><span class="s1">drawLine</span><span class="s2">(</span><span class="s1">padding</span><span class="s2">, </span><span class="s1">height </span><span class="s2">- </span><span class="s1">padding</span><span class="s2">, </span><span class="s1">padding</span><span class="s2">, </span><span class="s1">padding</span><span class="s2">); </span><span class="s3">// Y-axis</span>
+
+        <span class="s3">// Add Axis Labels</span>
+        <span class="s1">g2</span><span class="s2">.</span><span class="s1">setFont</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Font</span><span class="s2">(</span><span class="s5">&quot;Arial&quot;</span><span class="s2">, </span><span class="s1">Font</span><span class="s2">.</span><span class="s1">BOLD</span><span class="s2">, </span><span class="s4">14</span><span class="s2">));</span>
+        <span class="s1">g2</span><span class="s2">.</span><span class="s1">drawString</span><span class="s2">(</span><span class="s5">&quot;Time (frames)&quot;</span><span class="s2">, </span><span class="s1">width </span><span class="s2">/ </span><span class="s4">2 </span><span class="s2">- </span><span class="s4">40</span><span class="s2">, </span><span class="s1">height </span><span class="s2">- </span><span class="s4">10</span><span class="s2">); </span><span class="s3">// X-axis label</span>
+
+        <span class="s3">// Rotate and draw Y-axis label</span>
+        <span class="s1">g2</span><span class="s2">.</span><span class="s1">rotate</span><span class="s2">(-</span><span class="s1">Math</span><span class="s2">.</span><span class="s1">PI </span><span class="s2">/ </span><span class="s4">2</span><span class="s2">);</span>
+        <span class="s1">g2</span><span class="s2">.</span><span class="s1">drawString</span><span class="s2">(</span><span class="s5">&quot;Light Intensity&quot;</span><span class="s2">, -</span><span class="s1">height </span><span class="s2">/ </span><span class="s4">2</span><span class="s2">, </span><span class="s4">15</span><span class="s2">);</span>
+        <span class="s1">g2</span><span class="s2">.</span><span class="s1">rotate</span><span class="s2">(</span><span class="s1">Math</span><span class="s2">.</span><span class="s1">PI </span><span class="s2">/ </span><span class="s4">2</span><span class="s2">); </span><span class="s3">// Rotate back</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">values</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) </span><span class="s0">return</span><span class="s2">;</span>
+
+        <span class="s0">int </span><span class="s1">numPoints </span><span class="s2">= </span><span class="s1">values</span><span class="s2">.</span><span class="s1">size</span><span class="s2">();</span>
+        <span class="s0">int </span><span class="s1">stepX </span><span class="s2">= (</span><span class="s1">width </span><span class="s2">- </span><span class="s4">2 </span><span class="s2">* </span><span class="s1">padding</span><span class="s2">) / (</span><span class="s1">numPoints </span><span class="s2">- </span><span class="s4">1</span><span class="s2">);</span>
+        <span class="s0">int </span><span class="s1">maxY </span><span class="s2">= </span><span class="s1">values</span><span class="s2">.</span><span class="s1">stream</span><span class="s2">().</span><span class="s1">max</span><span class="s2">(</span><span class="s1">Integer::compare</span><span class="s2">).</span><span class="s1">orElse</span><span class="s2">(</span><span class="s4">1</span><span class="s2">);</span>
+
+        <span class="s3">// Plot points and lines</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">numPoints </span><span class="s2">- </span><span class="s4">1</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+            <span class="s0">int </span><span class="s1">x1 </span><span class="s2">= </span><span class="s1">padding </span><span class="s2">+ </span><span class="s1">i </span><span class="s2">* </span><span class="s1">stepX</span><span class="s2">;</span>
+            <span class="s0">int </span><span class="s1">y1 </span><span class="s2">= </span><span class="s1">height </span><span class="s2">- </span><span class="s1">padding </span><span class="s2">- (</span><span class="s1">values</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">i</span><span class="s2">) * (</span><span class="s1">height </span><span class="s2">- </span><span class="s4">2 </span><span class="s2">* </span><span class="s1">padding</span><span class="s2">) / </span><span class="s1">maxY</span><span class="s2">);</span>
+            <span class="s0">int </span><span class="s1">x2 </span><span class="s2">= </span><span class="s1">padding </span><span class="s2">+ (</span><span class="s1">i </span><span class="s2">+ </span><span class="s4">1</span><span class="s2">) * </span><span class="s1">stepX</span><span class="s2">;</span>
+            <span class="s0">int </span><span class="s1">y2 </span><span class="s2">= </span><span class="s1">height </span><span class="s2">- </span><span class="s1">padding </span><span class="s2">- (</span><span class="s1">values</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">i </span><span class="s2">+ </span><span class="s4">1</span><span class="s2">) * (</span><span class="s1">height </span><span class="s2">- </span><span class="s4">2 </span><span class="s2">* </span><span class="s1">padding</span><span class="s2">) / </span><span class="s1">maxY</span><span class="s2">);</span>
+
+            <span class="s1">g2</span><span class="s2">.</span><span class="s1">setColor</span><span class="s2">(</span><span class="s1">Color</span><span class="s2">.</span><span class="s1">BLUE</span><span class="s2">);</span>
+            <span class="s1">g2</span><span class="s2">.</span><span class="s1">drawLine</span><span class="s2">(</span><span class="s1">x1</span><span class="s2">, </span><span class="s1">y1</span><span class="s2">, </span><span class="s1">x2</span><span class="s2">, </span><span class="s1">y2</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

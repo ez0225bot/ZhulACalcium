@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>JavaToPythonVideoPlayer.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+JavaToPythonVideoPlayer.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.*;</span>
+
+
+<span class="s0">public class </span><span class="s1">JavaToPythonVideoPlayer </span><span class="s2">{</span>
+    <span class="s0">public void </span><span class="s1">JavaToPythonVideo</span><span class="s2">(</span><span class="s1">String videoFilePath</span><span class="s2">) {</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s1">String pythonScriptPath </span><span class="s2">= </span><span class="s3">&quot;/Users/elenazhu/PycharmProjects/PythonProject/VideoPlayer.py&quot;</span><span class="s2">;  </span><span class="s4">// path to python script</span>
+            <span class="s1">ProcessBuilder pb </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ProcessBuilder</span><span class="s2">(</span>
+                    <span class="s3">&quot;/Users/elenazhu/myenv/bin/python&quot;</span><span class="s2">,  </span><span class="s4">// bc my code is run in a virtual environment</span>
+                    <span class="s1">pythonScriptPath</span><span class="s2">,</span>
+                    <span class="s1">videoFilePath</span>
+            <span class="s2">);</span>
+
+
+            <span class="s4">// PYTHONPATH to my virtual environment's directory</span>
+            <span class="s1">pb</span><span class="s2">.</span><span class="s1">environment</span><span class="s2">().</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;PYTHONPATH&quot;</span><span class="s2">, </span><span class="s3">&quot;/Users/elenazhu/myenv/lib/python3.13/site-packages&quot;</span><span class="s2">);</span>
+
+
+            <span class="s1">Process process </span><span class="s2">= </span><span class="s1">pb</span><span class="s2">.</span><span class="s1">start</span><span class="s2">();</span>
+            <span class="s1">BufferedReader reader </span><span class="s2">= </span><span class="s0">new </span><span class="s1">BufferedReader</span><span class="s2">(</span><span class="s0">new </span><span class="s1">InputStreamReader</span><span class="s2">(</span><span class="s1">process</span><span class="s2">.</span><span class="s1">getInputStream</span><span class="s2">()));</span>
+            <span class="s1">String line</span><span class="s2">;</span>
+            <span class="s0">while </span><span class="s2">((</span><span class="s1">line </span><span class="s2">= </span><span class="s1">reader</span><span class="s2">.</span><span class="s1">readLine</span><span class="s2">()) != </span><span class="s0">null</span><span class="s2">) {</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">line</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception e</span><span class="s2">) {</span>
+            <span class="s1">e</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+</pre>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<html>
+<head>
+<title>PlayVid.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+PlayVid.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">opencv</span><span class="s2">.</span><span class="s1">core</span><span class="s2">.</span><span class="s1">Core</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">opencv</span><span class="s2">.</span><span class="s1">core</span><span class="s2">.</span><span class="s1">Mat</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">opencv</span><span class="s2">.</span><span class="s1">highgui</span><span class="s2">.</span><span class="s1">HighGui</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">opencv</span><span class="s2">.</span><span class="s1">videoio</span><span class="s2">.</span><span class="s1">VideoCapture</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.</span><span class="s1">event</span><span class="s2">.</span><span class="s1">WindowEvent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">ArrayList</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">LinkedList</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">List</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">PlayVid </span><span class="s2">{</span>
+    <span class="s0">static </span><span class="s2">{</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">loadLibrary</span><span class="s2">(</span><span class="s1">Core</span><span class="s2">.</span><span class="s1">NATIVE_LIBRARY_NAME</span><span class="s2">);</span>
+    <span class="s2">}  </span><span class="s3">// Load OpenCV library</span>
+
+    <span class="s0">private static </span><span class="s1">LinkedList</span><span class="s2">&lt;</span><span class="s1">Mat</span><span class="s2">&gt; </span><span class="s1">frameList</span><span class="s2">;</span>
+    <span class="s0">private static </span><span class="s1">Video video</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">PlayVid</span><span class="s2">(</span><span class="s1">String videoPath</span><span class="s2">) {</span>
+        <span class="s1">video </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Video</span><span class="s2">();</span>
+        <span class="s1">frameList </span><span class="s2">= </span><span class="s0">new </span><span class="s1">LinkedList</span><span class="s2">&lt;&gt;();</span>
+        <span class="s1">loadFrames</span><span class="s2">(</span><span class="s1">videoPath</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">loadFrames</span><span class="s2">(</span><span class="s1">String videoPath</span><span class="s2">) {</span>
+        <span class="s1">VideoCapture videoCapture </span><span class="s2">= </span><span class="s0">new </span><span class="s1">VideoCapture</span><span class="s2">(</span><span class="s1">videoPath</span><span class="s2">);</span>
+
+        <span class="s0">if </span><span class="s2">(!</span><span class="s1">videoCapture</span><span class="s2">.</span><span class="s1">isOpened</span><span class="s2">()) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Error: Cannot open video file!&quot;</span><span class="s2">);</span>
+            <span class="s0">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s1">Mat frame </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Mat</span><span class="s2">();</span>
+        <span class="s0">while </span><span class="s2">(</span><span class="s1">videoCapture</span><span class="s2">.</span><span class="s1">read</span><span class="s2">(</span><span class="s1">frame</span><span class="s2">)) {</span>
+            <span class="s1">frameList</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">frame</span><span class="s2">.</span><span class="s1">clone</span><span class="s2">());  </span><span class="s3">// Store a copy of the frame</span>
+        <span class="s2">}</span>
+
+        <span class="s1">videoCapture</span><span class="s2">.</span><span class="s1">release</span><span class="s2">();</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Frames loaded: &quot; </span><span class="s2">+ </span><span class="s1">frameList</span><span class="s2">.</span><span class="s1">size</span><span class="s2">());</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">LinkedList</span><span class="s2">&lt;</span><span class="s1">Mat</span><span class="s2">&gt; </span><span class="s1">getFrameList</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">frameList</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">displayFrames</span><span class="s2">() {</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">Mat frame </span><span class="s2">: </span><span class="s1">frameList</span><span class="s2">) {</span>
+            <span class="s1">HighGui</span><span class="s2">.</span><span class="s1">imshow</span><span class="s2">(</span><span class="s4">&quot;Frame&quot;</span><span class="s2">, </span><span class="s1">frame</span><span class="s2">);</span>
+            <span class="s1">HighGui</span><span class="s2">.</span><span class="s1">waitKey</span><span class="s2">(</span><span class="s5">30</span><span class="s2">);  </span><span class="s3">// Wait for 30 ms before displaying the next frame</span>
+        <span class="s2">}</span>
+        <span class="s1">HighGui</span><span class="s2">.</span><span class="s1">destroyAllWindows</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public int</span><span class="s2">[][] </span><span class="s1">convertToReducedMatrix</span><span class="s2">(</span><span class="s1">Mat frame</span><span class="s2">, </span><span class="s0">int </span><span class="s1">scaleFactor</span><span class="s2">) {</span>
+        <span class="s0">int </span><span class="s1">rows </span><span class="s2">= </span><span class="s1">frame</span><span class="s2">.</span><span class="s1">rows</span><span class="s2">();</span>
+        <span class="s0">int </span><span class="s1">cols </span><span class="s2">= </span><span class="s1">frame</span><span class="s2">.</span><span class="s1">cols</span><span class="s2">();</span>
+
+        <span class="s3">// New dimensions after scaling</span>
+        <span class="s0">int </span><span class="s1">newRows </span><span class="s2">= </span><span class="s1">rows </span><span class="s2">/ </span><span class="s1">scaleFactor</span><span class="s2">;</span>
+        <span class="s0">int </span><span class="s1">newCols </span><span class="s2">= </span><span class="s1">cols </span><span class="s2">/ </span><span class="s1">scaleFactor</span><span class="s2">;</span>
+
+        <span class="s0">int</span><span class="s2">[][] </span><span class="s1">reducedMatrix </span><span class="s2">= </span><span class="s0">new int</span><span class="s2">[</span><span class="s1">newRows</span><span class="s2">][</span><span class="s1">newCols</span><span class="s2">];</span>
+
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">newRows</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">j </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">j </span><span class="s2">&lt; </span><span class="s1">newCols</span><span class="s2">; </span><span class="s1">j</span><span class="s2">++) {</span>
+                <span class="s0">int </span><span class="s1">sum </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+                <span class="s0">int </span><span class="s1">count </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+
+                <span class="s3">// Sum all values in the block</span>
+                <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">x </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">x </span><span class="s2">&lt; </span><span class="s1">scaleFactor</span><span class="s2">; </span><span class="s1">x</span><span class="s2">++) {</span>
+                    <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">y </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">y </span><span class="s2">&lt; </span><span class="s1">scaleFactor</span><span class="s2">; </span><span class="s1">y</span><span class="s2">++) {</span>
+                        <span class="s0">int </span><span class="s1">origRow </span><span class="s2">= </span><span class="s1">i </span><span class="s2">* </span><span class="s1">scaleFactor </span><span class="s2">+ </span><span class="s1">x</span><span class="s2">;</span>
+                        <span class="s0">int </span><span class="s1">origCol </span><span class="s2">= </span><span class="s1">j </span><span class="s2">* </span><span class="s1">scaleFactor </span><span class="s2">+ </span><span class="s1">y</span><span class="s2">;</span>
+
+                        <span class="s0">if </span><span class="s2">(</span><span class="s1">origRow </span><span class="s2">&lt; </span><span class="s1">rows </span><span class="s2">&amp;&amp; </span><span class="s1">origCol </span><span class="s2">&lt; </span><span class="s1">cols</span><span class="s2">) { </span><span class="s3">// Avoid out-of-bounds</span>
+                            <span class="s1">sum </span><span class="s2">+= (</span><span class="s0">int</span><span class="s2">) </span><span class="s1">frame</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">origRow</span><span class="s2">, </span><span class="s1">origCol</span><span class="s2">)[</span><span class="s5">0</span><span class="s2">];</span>
+                            <span class="s1">count</span><span class="s2">++;</span>
+                        <span class="s2">}</span>
+                    <span class="s2">}</span>
+                <span class="s2">}</span>
+
+                <span class="s3">// Compute the average value for the block</span>
+                <span class="s1">reducedMatrix</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">j</span><span class="s2">] = </span><span class="s1">sum </span><span class="s2">/ </span><span class="s1">count</span><span class="s2">;</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">reducedMatrix</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+
+    <span class="s0">public void </span><span class="s1">loadFrameMatrices</span><span class="s2">() {</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">frameList</span><span class="s2">.</span><span class="s1">size</span><span class="s2">(); </span><span class="s1">i</span><span class="s2">++) {</span>
+            <span class="s3">//System.out.println(&quot;Frame &quot; + i + &quot; Matrix:&quot;);</span>
+            <span class="s0">int</span><span class="s2">[][] </span><span class="s1">matrix </span><span class="s2">= </span><span class="s1">convertToReducedMatrix</span><span class="s2">(</span><span class="s1">frameList</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">i</span><span class="s2">), </span><span class="s5">15</span><span class="s2">);</span>
+            <span class="s1">video</span><span class="s2">.</span><span class="s1">addFrame</span><span class="s2">(</span><span class="s1">matrix</span><span class="s2">);</span>
+            <span class="s3">//printMatrix(matrix);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">void </span><span class="s1">printMatrix</span><span class="s2">(</span><span class="s0">int</span><span class="s2">[][] </span><span class="s1">matrix</span><span class="s2">) {</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int</span><span class="s2">[] </span><span class="s1">row </span><span class="s2">: </span><span class="s1">matrix</span><span class="s2">) {</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">pixel </span><span class="s2">: </span><span class="s1">row</span><span class="s2">) {</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s1">pixel </span><span class="s2">+ </span><span class="s4">&quot; &quot;</span><span class="s2">);</span>
+            <span class="s2">}</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static void </span><span class="s1">main</span><span class="s2">(</span><span class="s1">String</span><span class="s2">[] </span><span class="s1">args</span><span class="s2">) {</span>
+        <span class="s1">String videoPath </span><span class="s2">= </span><span class="s4">&quot;output_video.avi&quot;</span><span class="s2">;  </span><span class="s3">// Change this to your AVI file path</span>
+
+        <span class="s1">PlayVid loader </span><span class="s2">= </span><span class="s0">new </span><span class="s1">PlayVid</span><span class="s2">(</span><span class="s1">videoPath</span><span class="s2">);</span>
+        <span class="s1">loader</span><span class="s2">.</span><span class="s1">displayFrames</span><span class="s2">();</span>
+
+        <span class="s1">loader</span><span class="s2">.</span><span class="s1">loadFrameMatrices</span><span class="s2">();</span>
+
+        <span class="s3">// test line</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Example Frame 1:&quot;</span><span class="s2">);</span>
+        <span class="s1">loader</span><span class="s2">.</span><span class="s1">printMatrix</span><span class="s2">(</span><span class="s1">video</span><span class="s2">.</span><span class="s1">getFrame</span><span class="s2">(</span><span class="s5">1</span><span class="s2">));</span>
+
+        <span class="s1">IdentifyCell bob </span><span class="s2">= </span><span class="s0">new </span><span class="s1">IdentifyCell</span><span class="s2">();</span>
+
+        <span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Cell</span><span class="s2">&gt; </span><span class="s1">patches </span><span class="s2">= </span><span class="s1">bob</span><span class="s2">.</span><span class="s1">findLightPatches</span><span class="s2">(</span><span class="s1">video</span><span class="s2">.</span><span class="s1">getFrame</span><span class="s2">(</span><span class="s5">1</span><span class="s2">), </span><span class="s5">15</span><span class="s2">);</span>
+        <span class="s1">IdentifyOscillations charlie </span><span class="s2">= </span><span class="s0">new </span><span class="s1">IdentifyOscillations</span><span class="s2">();</span>
+
+
+
+        <span class="s0">int </span><span class="s1">oscillationCount </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Detected Cells:&quot;</span><span class="s2">);</span>
+        <span class="s0">int </span><span class="s1">count </span><span class="s2">= </span><span class="s5">0</span><span class="s2">;</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">Cell patch </span><span class="s2">: </span><span class="s1">patches</span><span class="s2">) {</span>
+            <span class="s1">count</span><span class="s2">++;</span>
+            <span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Integer</span><span class="s2">&gt; </span><span class="s1">cellIntensities </span><span class="s2">= </span><span class="s1">bob</span><span class="s2">.</span><span class="s1">getCellIntensities</span><span class="s2">(</span><span class="s1">video</span><span class="s2">, </span><span class="s1">patch</span><span class="s2">, </span><span class="s5">10</span><span class="s2">);</span>
+
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">cellIntensities</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s4">&quot;Cell &quot; </span><span class="s2">+ </span><span class="s1">count </span><span class="s2">+ </span><span class="s4">&quot; &quot;</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">patch</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Oscillations: &quot; </span><span class="s2">+ </span><span class="s1">charlie</span><span class="s2">.</span><span class="s1">detectOscillations</span><span class="s2">(</span><span class="s1">cellIntensities</span><span class="s2">));</span>
+            <span class="s1">oscillationCount </span><span class="s2">+= </span><span class="s1">charlie</span><span class="s2">.</span><span class="s1">detectOscillations</span><span class="s2">(</span><span class="s1">cellIntensities</span><span class="s2">);</span>
+
+            <span class="s3">// Ensure the graph is opened in the event dispatch thread</span>
+            <span class="s0">final int </span><span class="s1">finalCount </span><span class="s2">= </span><span class="s1">count</span><span class="s2">;</span>
+            <span class="s1">SwingUtilities</span><span class="s2">.</span><span class="s1">invokeLater</span><span class="s2">(() </span><span class="s1">-&gt; </span><span class="s2">{</span>
+                <span class="s1">JFrame frame </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JFrame</span><span class="s2">(</span><span class="s4">&quot;Graph of Cell &quot; </span><span class="s2">+ </span><span class="s1">finalCount</span><span class="s2">);</span>
+                <span class="s1">frame</span><span class="s2">.</span><span class="s1">setDefaultCloseOperation</span><span class="s2">(</span><span class="s1">JFrame</span><span class="s2">.</span><span class="s1">DISPOSE_ON_CLOSE</span><span class="s2">); </span><span class="s3">// Prevents closing all windows</span>
+                <span class="s1">frame</span><span class="s2">.</span><span class="s1">setSize</span><span class="s2">(</span><span class="s5">600</span><span class="s2">, </span><span class="s5">400</span><span class="s2">);</span>
+                <span class="s1">frame</span><span class="s2">.</span><span class="s1">setContentPane</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Grapher</span><span class="s2">(</span><span class="s1">cellIntensities</span><span class="s2">));</span>
+                <span class="s1">frame</span><span class="s2">.</span><span class="s1">setVisible</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+            <span class="s2">});</span>
+
+            <span class="s3">// pause to allow graphs to be properly displayed</span>
+            <span class="s0">try </span><span class="s2">{</span>
+                <span class="s1">Thread</span><span class="s2">.</span><span class="s1">sleep</span><span class="s2">(</span><span class="s5">500</span><span class="s2">); </span><span class="s3">// delay length</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">InterruptedException e</span><span class="s2">) {</span>
+                <span class="s1">e</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+
+        <span class="s1">JFrame frame </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JFrame</span><span class="s2">(</span><span class="s4">&quot;Final Overview&quot;</span><span class="s2">);</span>
+        <span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showMessageDialog</span><span class="s2">(</span><span class="s1">frame</span><span class="s2">, </span><span class="s4">&quot;Average number of Oscillations: &quot; </span><span class="s2">+ </span><span class="s1">oscillationCount </span><span class="s2">/ (</span><span class="s1">count</span><span class="s2">));</span>
+        <span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showMessageDialog</span><span class="s2">(</span><span class="s1">frame</span><span class="s2">, </span><span class="s4">&quot;Total number of Cells: &quot; </span><span class="s2">+(</span><span class="s1">count</span><span class="s2">));</span>
+        <span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showMessageDialog</span><span class="s2">(</span><span class="s1">frame</span><span class="s2">,</span><span class="s4">&quot;Thanks for visiting!&quot;</span><span class="s2">);</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">exit</span><span class="s2">(</span><span class="s5">0</span><span class="s2">);</span>
+
+
+
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+
+</pre>
+</body>
+</html>

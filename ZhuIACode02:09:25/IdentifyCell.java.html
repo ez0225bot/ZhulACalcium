@@ -1,0 +1,155 @@
+<html>
+<head>
+<title>IdentifyCell.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+IdentifyCell.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">ArrayList</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">LinkedList</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">List</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Queue</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">IdentifyCell </span><span class="s2">{</span>
+
+    <span class="s3">// Directions for 8-neighbor connectivity</span>
+    <span class="s0">private static final int</span><span class="s2">[][] </span><span class="s1">DIRECTIONS </span><span class="s2">= {</span>
+            <span class="s2">{-</span><span class="s4">1</span><span class="s2">, </span><span class="s4">0</span><span class="s2">}, {</span><span class="s4">1</span><span class="s2">, </span><span class="s4">0</span><span class="s2">}, {</span><span class="s4">0</span><span class="s2">, -</span><span class="s4">1</span><span class="s2">}, {</span><span class="s4">0</span><span class="s2">, </span><span class="s4">1</span><span class="s2">}, </span><span class="s3">// Up, Down, Left, Right</span>
+            <span class="s2">{-</span><span class="s4">1</span><span class="s2">, -</span><span class="s4">1</span><span class="s2">}, {-</span><span class="s4">1</span><span class="s2">, </span><span class="s4">1</span><span class="s2">}, {</span><span class="s4">1</span><span class="s2">, -</span><span class="s4">1</span><span class="s2">}, {</span><span class="s4">1</span><span class="s2">, </span><span class="s4">1</span><span class="s2">} </span><span class="s3">// Diagonal</span>
+    <span class="s2">};</span>
+
+    <span class="s0">public static </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Cell</span><span class="s2">&gt; </span><span class="s1">findLightPatches</span><span class="s2">(</span><span class="s0">int</span><span class="s2">[][] </span><span class="s1">matrix</span><span class="s2">, </span><span class="s0">int </span><span class="s1">threshold</span><span class="s2">) {</span>
+        <span class="s0">int </span><span class="s1">rows </span><span class="s2">= </span><span class="s1">matrix</span><span class="s2">.</span><span class="s1">length</span><span class="s2">;</span>
+        <span class="s0">int </span><span class="s1">cols </span><span class="s2">= </span><span class="s1">matrix</span><span class="s2">[</span><span class="s4">0</span><span class="s2">].</span><span class="s1">length</span><span class="s2">;</span>
+        <span class="s0">boolean</span><span class="s2">[][] </span><span class="s1">visited </span><span class="s2">= </span><span class="s0">new boolean</span><span class="s2">[</span><span class="s1">rows</span><span class="s2">][</span><span class="s1">cols</span><span class="s2">];</span>
+        <span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Cell</span><span class="s2">&gt; </span><span class="s1">patches </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+
+        <span class="s3">// Traverse the matrix</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">rows</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">j </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">j </span><span class="s2">&lt; </span><span class="s1">cols</span><span class="s2">; </span><span class="s1">j</span><span class="s2">++) {</span>
+                <span class="s0">if </span><span class="s2">(!</span><span class="s1">visited</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">j</span><span class="s2">] &amp;&amp; </span><span class="s1">matrix</span><span class="s2">[</span><span class="s1">i</span><span class="s2">][</span><span class="s1">j</span><span class="s2">] &gt; </span><span class="s1">threshold</span><span class="s2">) {</span>
+                    <span class="s1">patches</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">floodFill</span><span class="s2">(</span><span class="s1">matrix</span><span class="s2">, </span><span class="s1">visited</span><span class="s2">, </span><span class="s1">i</span><span class="s2">, </span><span class="s1">j</span><span class="s2">, </span><span class="s1">threshold</span><span class="s2">));</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">patches</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private static </span><span class="s1">Cell floodFill</span><span class="s2">(</span><span class="s0">int</span><span class="s2">[][] </span><span class="s1">matrix</span><span class="s2">, </span><span class="s0">boolean</span><span class="s2">[][] </span><span class="s1">visited</span><span class="s2">, </span><span class="s0">int </span><span class="s1">startX</span><span class="s2">, </span><span class="s0">int </span><span class="s1">startY</span><span class="s2">, </span><span class="s0">int </span><span class="s1">threshold</span><span class="s2">) {</span>
+        <span class="s0">int </span><span class="s1">rows </span><span class="s2">= </span><span class="s1">matrix</span><span class="s2">.</span><span class="s1">length</span><span class="s2">;</span>
+        <span class="s0">int </span><span class="s1">cols </span><span class="s2">= </span><span class="s1">matrix</span><span class="s2">[</span><span class="s4">0</span><span class="s2">].</span><span class="s1">length</span><span class="s2">;</span>
+        <span class="s1">Queue</span><span class="s2">&lt;</span><span class="s0">int</span><span class="s2">[]&gt; </span><span class="s1">queue </span><span class="s2">= </span><span class="s0">new </span><span class="s1">LinkedList</span><span class="s2">&lt;&gt;();</span>
+        <span class="s1">queue</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s0">new int</span><span class="s2">[]{</span><span class="s1">startX</span><span class="s2">, </span><span class="s1">startY</span><span class="s2">});</span>
+        <span class="s1">visited</span><span class="s2">[</span><span class="s1">startX</span><span class="s2">][</span><span class="s1">startY</span><span class="s2">] = </span><span class="s0">true</span><span class="s2">;</span>
+
+        <span class="s0">int </span><span class="s1">minX </span><span class="s2">= </span><span class="s1">startX</span><span class="s2">, </span><span class="s1">minY </span><span class="s2">= </span><span class="s1">startY</span><span class="s2">, </span><span class="s1">maxX </span><span class="s2">= </span><span class="s1">startX</span><span class="s2">, </span><span class="s1">maxY </span><span class="s2">= </span><span class="s1">startY</span><span class="s2">;</span>
+        <span class="s0">int </span><span class="s1">totalIntensity </span><span class="s2">= </span><span class="s4">0</span><span class="s2">, </span><span class="s1">count </span><span class="s2">= </span><span class="s4">0</span><span class="s2">;</span>
+
+        <span class="s0">while </span><span class="s2">(!</span><span class="s1">queue</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+            <span class="s0">int</span><span class="s2">[] </span><span class="s1">point </span><span class="s2">= </span><span class="s1">queue</span><span class="s2">.</span><span class="s1">poll</span><span class="s2">();</span>
+            <span class="s0">int </span><span class="s1">x </span><span class="s2">= </span><span class="s1">point</span><span class="s2">[</span><span class="s4">0</span><span class="s2">], </span><span class="s1">y </span><span class="s2">= </span><span class="s1">point</span><span class="s2">[</span><span class="s4">1</span><span class="s2">];</span>
+
+            <span class="s3">// Update bounding box</span>
+            <span class="s1">minX </span><span class="s2">= </span><span class="s1">Math</span><span class="s2">.</span><span class="s1">min</span><span class="s2">(</span><span class="s1">minX</span><span class="s2">, </span><span class="s1">x</span><span class="s2">);</span>
+            <span class="s1">minY </span><span class="s2">= </span><span class="s1">Math</span><span class="s2">.</span><span class="s1">min</span><span class="s2">(</span><span class="s1">minY</span><span class="s2">, </span><span class="s1">y</span><span class="s2">);</span>
+            <span class="s1">maxX </span><span class="s2">= </span><span class="s1">Math</span><span class="s2">.</span><span class="s1">max</span><span class="s2">(</span><span class="s1">maxX</span><span class="s2">, </span><span class="s1">x</span><span class="s2">);</span>
+            <span class="s1">maxY </span><span class="s2">= </span><span class="s1">Math</span><span class="s2">.</span><span class="s1">max</span><span class="s2">(</span><span class="s1">maxY</span><span class="s2">, </span><span class="s1">y</span><span class="s2">);</span>
+
+            <span class="s1">totalIntensity </span><span class="s2">+= </span><span class="s1">matrix</span><span class="s2">[</span><span class="s1">x</span><span class="s2">][</span><span class="s1">y</span><span class="s2">];</span>
+            <span class="s1">count</span><span class="s2">++;</span>
+
+            <span class="s3">// Check 8-neighbor connectivity</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s0">int</span><span class="s2">[] </span><span class="s1">dir </span><span class="s2">: </span><span class="s1">DIRECTIONS</span><span class="s2">) {</span>
+                <span class="s0">int </span><span class="s1">newX </span><span class="s2">= </span><span class="s1">x </span><span class="s2">+ </span><span class="s1">dir</span><span class="s2">[</span><span class="s4">0</span><span class="s2">], </span><span class="s1">newY </span><span class="s2">= </span><span class="s1">y </span><span class="s2">+ </span><span class="s1">dir</span><span class="s2">[</span><span class="s4">1</span><span class="s2">];</span>
+
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">newX </span><span class="s2">&gt;= </span><span class="s4">0 </span><span class="s2">&amp;&amp; </span><span class="s1">newX </span><span class="s2">&lt; </span><span class="s1">rows </span><span class="s2">&amp;&amp; </span><span class="s1">newY </span><span class="s2">&gt;= </span><span class="s4">0 </span><span class="s2">&amp;&amp; </span><span class="s1">newY </span><span class="s2">&lt; </span><span class="s1">cols </span><span class="s2">&amp;&amp;</span>
+                        <span class="s2">!</span><span class="s1">visited</span><span class="s2">[</span><span class="s1">newX</span><span class="s2">][</span><span class="s1">newY</span><span class="s2">] &amp;&amp; </span><span class="s1">matrix</span><span class="s2">[</span><span class="s1">newX</span><span class="s2">][</span><span class="s1">newY</span><span class="s2">] &gt; </span><span class="s1">threshold</span><span class="s2">) {</span>
+                    <span class="s1">visited</span><span class="s2">[</span><span class="s1">newX</span><span class="s2">][</span><span class="s1">newY</span><span class="s2">] = </span><span class="s0">true</span><span class="s2">;</span>
+                    <span class="s1">queue</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s0">new int</span><span class="s2">[]{</span><span class="s1">newX</span><span class="s2">, </span><span class="s1">newY</span><span class="s2">});</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s3">// Calculate dimensions</span>
+        <span class="s0">int </span><span class="s1">width </span><span class="s2">= </span><span class="s1">maxX </span><span class="s2">- </span><span class="s1">minX </span><span class="s2">+ </span><span class="s4">1</span><span class="s2">;</span>
+        <span class="s0">int </span><span class="s1">height </span><span class="s2">= </span><span class="s1">maxY </span><span class="s2">- </span><span class="s1">minY </span><span class="s2">+ </span><span class="s4">1</span><span class="s2">;</span>
+
+        <span class="s3">// Compute center coordinates</span>
+        <span class="s0">int </span><span class="s1">centerX </span><span class="s2">= </span><span class="s1">minX </span><span class="s2">+ </span><span class="s1">width </span><span class="s2">/ </span><span class="s4">2</span><span class="s2">;</span>
+        <span class="s0">int </span><span class="s1">centerY </span><span class="s2">= </span><span class="s1">minY </span><span class="s2">+ </span><span class="s1">height </span><span class="s2">/ </span><span class="s4">2</span><span class="s2">;</span>
+
+        <span class="s3">// Ensure centerX and centerY are within bounds</span>
+        <span class="s1">centerX </span><span class="s2">= </span><span class="s1">Math</span><span class="s2">.</span><span class="s1">max</span><span class="s2">(</span><span class="s4">0</span><span class="s2">, </span><span class="s1">Math</span><span class="s2">.</span><span class="s1">min</span><span class="s2">(</span><span class="s1">centerX</span><span class="s2">, </span><span class="s1">rows </span><span class="s2">- </span><span class="s4">1</span><span class="s2">));</span>
+        <span class="s1">centerY </span><span class="s2">= </span><span class="s1">Math</span><span class="s2">.</span><span class="s1">max</span><span class="s2">(</span><span class="s4">0</span><span class="s2">, </span><span class="s1">Math</span><span class="s2">.</span><span class="s1">min</span><span class="s2">(</span><span class="s1">centerY</span><span class="s2">, </span><span class="s1">cols </span><span class="s2">- </span><span class="s4">1</span><span class="s2">));</span>
+
+        <span class="s3">// Get intensity at the center coordinates</span>
+        <span class="s0">int </span><span class="s1">sumIntensity </span><span class="s2">= </span><span class="s1">matrix</span><span class="s2">[</span><span class="s1">centerX</span><span class="s2">][</span><span class="s1">centerY</span><span class="s2">];</span>
+
+        <span class="s3">// Calculate average intensity of the whole cell</span>
+        <span class="s0">int </span><span class="s1">avgIntensity </span><span class="s2">= (</span><span class="s1">count </span><span class="s2">&gt; </span><span class="s4">0</span><span class="s2">) ? (</span><span class="s1">totalIntensity </span><span class="s2">/ </span><span class="s1">count</span><span class="s2">) : </span><span class="s4">0</span><span class="s2">;</span>
+
+        <span class="s0">return new </span><span class="s1">Cell</span><span class="s2">(</span><span class="s1">centerX</span><span class="s2">, </span><span class="s1">centerY</span><span class="s2">, </span><span class="s1">width</span><span class="s2">, </span><span class="s1">height</span><span class="s2">, </span><span class="s1">matrix</span><span class="s2">, </span><span class="s1">avgIntensity</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+
+
+
+    <span class="s0">public </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Integer</span><span class="s2">&gt; </span><span class="s1">getCellIntensities</span><span class="s2">(</span><span class="s1">Video video</span><span class="s2">, </span><span class="s1">Cell targetCell</span><span class="s2">, </span><span class="s0">int </span><span class="s1">threshold</span><span class="s2">) {</span>
+        <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Integer</span><span class="s2">&gt; </span><span class="s1">cellIntensities </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+        <span class="s0">int </span><span class="s1">frameCount </span><span class="s2">= </span><span class="s1">video</span><span class="s2">.</span><span class="s1">getFrameCount</span><span class="s2">();</span>
+
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">frameCount</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+            <span class="s0">int</span><span class="s2">[][] </span><span class="s1">matrix </span><span class="s2">= </span><span class="s1">video</span><span class="s2">.</span><span class="s1">getFrame</span><span class="s2">(</span><span class="s1">i</span><span class="s2">);</span>
+
+            <span class="s3">// Extract the submatrix for the target cell using its coordinates and size</span>
+            <span class="s0">int </span><span class="s1">startX </span><span class="s2">= </span><span class="s1">targetCell</span><span class="s2">.</span><span class="s1">getX</span><span class="s2">();</span>
+            <span class="s0">int </span><span class="s1">startY </span><span class="s2">= </span><span class="s1">targetCell</span><span class="s2">.</span><span class="s1">getY</span><span class="s2">();</span>
+            <span class="s0">int </span><span class="s1">width </span><span class="s2">= </span><span class="s1">targetCell</span><span class="s2">.</span><span class="s1">getWidth</span><span class="s2">();</span>
+            <span class="s0">int </span><span class="s1">height </span><span class="s2">= </span><span class="s1">targetCell</span><span class="s2">.</span><span class="s1">getHeight</span><span class="s2">();</span>
+
+            <span class="s0">int </span><span class="s1">sumIntensity </span><span class="s2">= </span><span class="s4">0</span><span class="s2">;</span>
+            <span class="s0">int </span><span class="s1">pixelCount </span><span class="s2">= </span><span class="s4">0</span><span class="s2">;</span>
+
+            <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">x </span><span class="s2">= </span><span class="s1">startX</span><span class="s2">; </span><span class="s1">x </span><span class="s2">&lt; </span><span class="s1">startX </span><span class="s2">+ </span><span class="s1">width</span><span class="s2">; </span><span class="s1">x</span><span class="s2">++) {</span>
+                <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">y </span><span class="s2">= </span><span class="s1">startY</span><span class="s2">; </span><span class="s1">y </span><span class="s2">&lt; </span><span class="s1">startY </span><span class="s2">+ </span><span class="s1">height</span><span class="s2">; </span><span class="s1">y</span><span class="s2">++) {</span>
+                    <span class="s0">if </span><span class="s2">(</span><span class="s1">x </span><span class="s2">&gt;= </span><span class="s4">0 </span><span class="s2">&amp;&amp; </span><span class="s1">x </span><span class="s2">&lt; </span><span class="s1">matrix</span><span class="s2">.</span><span class="s1">length </span><span class="s2">&amp;&amp; </span><span class="s1">y </span><span class="s2">&gt;= </span><span class="s4">0 </span><span class="s2">&amp;&amp; </span><span class="s1">y </span><span class="s2">&lt; </span><span class="s1">matrix</span><span class="s2">[</span><span class="s4">0</span><span class="s2">].</span><span class="s1">length</span><span class="s2">) {</span>
+                        <span class="s3">// Disregard pixels with intensity below the threshold</span>
+                        <span class="s0">if </span><span class="s2">(</span><span class="s1">matrix</span><span class="s2">[</span><span class="s1">x</span><span class="s2">][</span><span class="s1">y</span><span class="s2">] &gt;= </span><span class="s1">threshold</span><span class="s2">) {</span>
+                            <span class="s1">sumIntensity </span><span class="s2">+= </span><span class="s1">matrix</span><span class="s2">[</span><span class="s1">x</span><span class="s2">][</span><span class="s1">y</span><span class="s2">];</span>
+                            <span class="s1">pixelCount</span><span class="s2">++;</span>
+                        <span class="s2">}</span>
+                    <span class="s2">}</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+
+            <span class="s3">// Compute the average intensity for this cell in the current frame, if pixelCount &gt; 0</span>
+            <span class="s0">int </span><span class="s1">cellAvgIntensity </span><span class="s2">= (</span><span class="s1">pixelCount </span><span class="s2">&gt; </span><span class="s4">0</span><span class="s2">) ? </span><span class="s1">sumIntensity </span><span class="s2">/ </span><span class="s1">pixelCount </span><span class="s2">: </span><span class="s4">0</span><span class="s2">;</span>
+            <span class="s1">cellIntensities</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">cellAvgIntensity</span><span class="s2">);</span>
+        <span class="s2">}</span>
+
+        <span class="s0">return </span><span class="s1">cellIntensities</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+
+
+
+
+
+    <span class="s3">// Test function</span>
+
+    <span class="s2">}</span>
+
+</pre>
+</body>
+</html>

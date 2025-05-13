@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>IdentifyOscillations.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+IdentifyOscillations.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">List</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">IdentifyOscillations </span><span class="s2">{</span>
+
+    <span class="s3">// Method to detect oscillations for a single Cell based on its intensity changes over time</span>
+    <span class="s0">public int </span><span class="s1">detectOscillations</span><span class="s2">(</span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Integer</span><span class="s2">&gt; </span><span class="s1">cellIntensities</span><span class="s2">) {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">cellIntensities </span><span class="s2">== </span><span class="s0">null </span><span class="s2">|| </span><span class="s1">cellIntensities</span><span class="s2">.</span><span class="s1">size</span><span class="s2">() &lt; </span><span class="s4">3</span><span class="s2">) {</span>
+            <span class="s0">return </span><span class="s4">0</span><span class="s2">;  </span><span class="s3">// Need at least 3 values to detect an oscillation</span>
+        <span class="s2">}</span>
+
+        <span class="s0">int </span><span class="s1">oscillationCount </span><span class="s2">= </span><span class="s4">0</span><span class="s2">;</span>
+        <span class="s0">boolean </span><span class="s1">isIncreasing </span><span class="s2">= </span><span class="s1">cellIntensities</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s4">1</span><span class="s2">) &gt; </span><span class="s1">cellIntensities</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s4">0</span><span class="s2">); </span><span class="s3">// Initial trend</span>
+
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s4">1</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">cellIntensities</span><span class="s2">.</span><span class="s1">size</span><span class="s2">(); </span><span class="s1">i</span><span class="s2">++) {</span>
+            <span class="s0">int </span><span class="s1">previousIntensity </span><span class="s2">= </span><span class="s1">cellIntensities</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">i </span><span class="s2">- </span><span class="s4">1</span><span class="s2">);</span>
+            <span class="s0">int </span><span class="s1">currentIntensity </span><span class="s2">= </span><span class="s1">cellIntensities</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">i</span><span class="s2">);</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">isIncreasing </span><span class="s2">&amp;&amp; </span><span class="s1">currentIntensity </span><span class="s2">&lt; </span><span class="s1">previousIntensity</span><span class="s2">) {</span>
+                <span class="s3">// trend changed from High to Low</span>
+                <span class="s1">isIncreasing </span><span class="s2">= </span><span class="s0">false</span><span class="s2">;</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(!</span><span class="s1">isIncreasing </span><span class="s2">&amp;&amp; </span><span class="s1">currentIntensity </span><span class="s2">&gt; </span><span class="s1">previousIntensity</span><span class="s2">) {</span>
+                <span class="s3">// trend changed from Low to High = count as an oscillation</span>
+                <span class="s1">oscillationCount</span><span class="s2">++;</span>
+                <span class="s1">isIncreasing </span><span class="s2">= </span><span class="s0">true</span><span class="s2">;</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s0">return </span><span class="s1">oscillationCount</span><span class="s2">;</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

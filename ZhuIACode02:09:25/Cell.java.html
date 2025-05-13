@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>Cell.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Cell.java</font>
+</center></td></tr></table>
+<pre><span class="s0">public class </span><span class="s1">Cell </span><span class="s2">{</span>
+    <span class="s0">private int</span><span class="s2">[][] </span><span class="s1">matrix</span><span class="s2">;</span>
+    <span class="s0">private int </span><span class="s1">x</span><span class="s2">; </span><span class="s3">// X-coordinate of the top-left corner or center</span>
+    <span class="s0">private int </span><span class="s1">y</span><span class="s2">; </span><span class="s3">// Y-coordinate of the top-left corner or center</span>
+    <span class="s0">private int </span><span class="s1">width</span><span class="s2">; </span><span class="s3">// Width of the light patch</span>
+    <span class="s0">private int </span><span class="s1">height</span><span class="s2">;</span>
+    <span class="s0">private int </span><span class="s1">averageIntensity</span><span class="s2">;</span><span class="s3">// Height of the light patch</span>
+
+
+    <span class="s3">// Constructor</span>
+    <span class="s0">public </span><span class="s1">Cell</span><span class="s2">(</span><span class="s0">int </span><span class="s1">x</span><span class="s2">, </span><span class="s0">int </span><span class="s1">y</span><span class="s2">, </span><span class="s0">int </span><span class="s1">width</span><span class="s2">, </span><span class="s0">int </span><span class="s1">height</span><span class="s2">, </span><span class="s0">int</span><span class="s2">[][] </span><span class="s1">matrix</span><span class="s2">, </span><span class="s0">int </span><span class="s1">averageIntensity</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">x </span><span class="s2">= </span><span class="s1">x</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">y </span><span class="s2">= </span><span class="s1">y</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">width </span><span class="s2">= </span><span class="s1">width</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">height </span><span class="s2">= </span><span class="s1">height</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">matrix </span><span class="s2">= </span><span class="s1">matrix</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">averageIntensity </span><span class="s2">= </span><span class="s1">averageIntensity</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// Getter methods</span>
+    <span class="s0">public int </span><span class="s1">getX</span><span class="s2">()</span>
+    <span class="s2">{ </span><span class="s0">return </span><span class="s1">x</span><span class="s2">; }</span>
+    <span class="s0">public int </span><span class="s1">getY</span><span class="s2">()</span>
+    <span class="s2">{ </span><span class="s0">return </span><span class="s1">y</span><span class="s2">; }</span>
+    <span class="s0">public int </span><span class="s1">getWidth</span><span class="s2">()</span>
+    <span class="s2">{ </span><span class="s0">return </span><span class="s1">width</span><span class="s2">; }</span>
+    <span class="s0">public int </span><span class="s1">getHeight</span><span class="s2">()</span>
+    <span class="s2">{ </span><span class="s0">return </span><span class="s1">height</span><span class="s2">; }</span>
+    <span class="s0">public int</span><span class="s2">[][] </span><span class="s1">getMatrix</span><span class="s2">()</span>
+    <span class="s2">{</span><span class="s0">return </span><span class="s1">matrix</span><span class="s2">;}</span>
+    <span class="s0">public int </span><span class="s1">getAverageIntensity</span><span class="s2">()</span>
+    <span class="s2">{</span><span class="s0">return </span><span class="s1">averageIntensity</span><span class="s2">;}</span>
+
+
+    <span class="s3">// Setter methods</span>
+    <span class="s0">public void </span><span class="s1">setX</span><span class="s2">(</span><span class="s0">int </span><span class="s1">x</span><span class="s2">)</span>
+    <span class="s2">{ </span><span class="s0">this</span><span class="s2">.</span><span class="s1">x </span><span class="s2">= </span><span class="s1">x</span><span class="s2">; }</span>
+    <span class="s0">public void </span><span class="s1">setY</span><span class="s2">(</span><span class="s0">int </span><span class="s1">y</span><span class="s2">)</span>
+    <span class="s2">{ </span><span class="s0">this</span><span class="s2">.</span><span class="s1">y </span><span class="s2">= </span><span class="s1">y</span><span class="s2">; }</span>
+    <span class="s0">public void </span><span class="s1">setWidth</span><span class="s2">(</span><span class="s0">int </span><span class="s1">width</span><span class="s2">)</span>
+    <span class="s2">{ </span><span class="s0">this</span><span class="s2">.</span><span class="s1">width </span><span class="s2">= </span><span class="s1">width</span><span class="s2">; }</span>
+    <span class="s0">public void </span><span class="s1">setHeight</span><span class="s2">(</span><span class="s0">int </span><span class="s1">height</span><span class="s2">)</span>
+    <span class="s2">{ </span><span class="s0">this</span><span class="s2">.</span><span class="s1">height </span><span class="s2">= </span><span class="s1">height</span><span class="s2">; }</span>
+    <span class="s0">public void </span><span class="s1">setMatrix</span><span class="s2">(</span><span class="s0">int</span><span class="s2">[][] </span><span class="s1">matrix</span><span class="s2">)</span>
+    <span class="s2">{</span><span class="s0">this</span><span class="s2">.</span><span class="s1">matrix</span><span class="s2">= </span><span class="s1">matrix</span><span class="s2">;}</span>
+    <span class="s0">public void </span><span class="s1">setAverageIntensity</span><span class="s2">()</span>
+    <span class="s2">{</span><span class="s0">this</span><span class="s2">.</span><span class="s1">averageIntensity</span><span class="s2">=</span><span class="s1">averageIntensity</span><span class="s2">;}</span>
+
+    <span class="s3">// To String method for easy printing</span>
+    <span class="s1">@Override</span>
+    <span class="s0">public </span><span class="s1">String toString</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s4">&quot;[x=&quot; </span><span class="s2">+ </span><span class="s1">x </span><span class="s2">+ </span><span class="s4">&quot;, y=&quot; </span><span class="s2">+ </span><span class="s1">y </span><span class="s2">+ </span><span class="s4">&quot;, width=&quot; </span><span class="s2">+ </span><span class="s1">width </span><span class="s2">+ </span><span class="s4">&quot;, height=&quot; </span><span class="s2">+ </span><span class="s1">height </span><span class="s2">+ </span><span class="s4">&quot;]&quot;</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+<span class="s2">}</span>
+
+</pre>
+</body>
+</html>

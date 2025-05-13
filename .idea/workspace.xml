@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0a87743a-8ea1-4538-ac4c-b8740f5aa29e" name="Changes" comment="Initial Commit" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExportToHTMLSettings">
+    <option name="printScope" value="4" />
+    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/exportToHTML" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "ez0225bot"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/ez0225bot/ZhulACalcium",
+    "accountId": "569b5ea1-0f2f-4627-8cbf-14bcd9d8f34c"
+  }
+}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2pXAaRLu0qmPt3lDvOjL9fmWZZP" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Grapher.executor": "Run",
+    "Application.GreyscaleVideoPlayer.executor": "Run",
+    "Application.HelloJavaFX.executor": "Run",
+    "Application.JavaFX.executor": "Run",
+    "Application.JavaToPython.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.MainClass.executor": "Run",
+    "Application.OpenCVTest.executor": "Run",
+    "Application.PlayVid.executor": "Run",
+    "Application.Test.executor": "Run",
+    "Application.TestOpenCV.executor": "Run",
+    "Application.Unnamed.executor": "Run",
+    "Application.VideoAnalyzer.executor": "Run",
+    "Application.VideoReceiver.executor": "Run",
+    "Application.VideoToGreyscale.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "deletionFromPopupRequiresConfirmation": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/elenazhu/IdeaProjects/ZhuIACalcium",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "/Users/elenazhu/IdeaProjects/ZhuIACalcium/src/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "configurable.group.tools",
+    "settings.editor.splitter.proportion": "0.23445463",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.PlayVid">
+    <configuration name="PlayVid" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="PlayVid" />
+      <module name="ZhuIACalcium" />
+      <option name="VM_PARAMETERS" value="-Djava.library.path=$USER_HOME$/Desktop/opencv-4.10.0/build/lib" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestOpenCV" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="TestOpenCV" />
+      <module name="ZhuIACalcium" />
+      <option name="VM_PARAMETERS" value="-Djava.library.path=$USER_HOME$/Desktop/opencv-4.10.0/build/lib" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Video" />
+      <module name="ZhuIACalcium" />
+      <option name="VM_PARAMETERS" value="java -Djava.library.path=/opt/homebrew/opt/opencv/lib -classpath $PROJECT_DIR$/src/PlayVid.java:/path/to/opencv-4100.jar Video" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.PlayVid" />
+      <item itemvalue="Application.TestOpenCV" />
+      <item itemvalue="Application.Unnamed" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0a87743a-8ea1-4538-ac4c-b8740f5aa29e" name="Changes" comment="" />
+      <created>1732902111374</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1732902111374</updated>
+      <workItem from="1732902112282" duration="123000" />
+      <workItem from="1732902243424" duration="9757000" />
+      <workItem from="1733937523273" duration="13403000" />
+      <workItem from="1734072069039" duration="2398000" />
+      <workItem from="1734079151696" duration="11234000" />
+      <workItem from="1734113786363" duration="50000" />
+      <workItem from="1734113896010" duration="11201000" />
+      <workItem from="1734316477459" duration="652000" />
+      <workItem from="1734317134945" duration="8527000" />
+      <workItem from="1734479084568" duration="1568000" />
+      <workItem from="1734649871594" duration="2638000" />
+    </task>
+    <task id="LOCAL-00001" summary="Initial Commit">
+      <option name="closed" value="true" />
+      <created>1747167645456</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1747167645456</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial Commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial Commit" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.UnsatisfiedLinkError" package="java.lang" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

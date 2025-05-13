@@ -1,0 +1,102 @@
+<html>
+<head>
+<title>VideoImporter.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+VideoImporter.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.</span><span class="s1">filechooser</span><span class="s2">.</span><span class="s1">FileNameExtensionFilter</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">File</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.</span><span class="s1">JFrame</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.</span><span class="s1">JOptionPane</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.</span><span class="s1">JButton</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.</span><span class="s1">event</span><span class="s2">.</span><span class="s1">ActionListener</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.</span><span class="s1">event</span><span class="s2">.</span><span class="s1">ActionEvent</span><span class="s2">;</span>
+
+
+
+
+<span class="s0">public class </span><span class="s1">VideoImporter </span><span class="s0">extends </span><span class="s1">JFrame </span><span class="s2">{</span>
+
+    <span class="s0">private </span><span class="s1">File selectedFile</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">String selectedFileName</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">JButton importButton</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">JFrame frame</span><span class="s2">;</span>
+    <span class="s0">private boolean </span><span class="s1">HasVideo</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">JFileChooser filechooser</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">FileNameExtensionFilter filter</span><span class="s2">;</span>
+
+
+    <span class="s0">public </span><span class="s1">VideoImporter</span><span class="s2">() {</span>
+
+        <span class="s1">frame </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JFrame</span><span class="s2">(</span><span class="s3">&quot;File Importer&quot;</span><span class="s2">);</span>
+        <span class="s1">frame</span><span class="s2">.</span><span class="s1">setDefaultCloseOperation</span><span class="s2">(</span><span class="s1">JFrame</span><span class="s2">.</span><span class="s1">EXIT_ON_CLOSE</span><span class="s2">);</span>
+        <span class="s1">frame</span><span class="s2">.</span><span class="s1">setSize</span><span class="s2">(</span><span class="s4">400</span><span class="s2">, </span><span class="s4">200</span><span class="s2">);</span>
+        <span class="s1">frame</span><span class="s2">.</span><span class="s1">setLayout</span><span class="s2">(</span><span class="s0">new </span><span class="s1">FlowLayout</span><span class="s2">());</span>
+
+        <span class="s1">importButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JButton</span><span class="s2">(</span><span class="s3">&quot;Import File&quot;</span><span class="s2">);</span>
+        <span class="s1">importButton</span><span class="s2">.</span><span class="s1">setFont</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Font</span><span class="s2">(</span><span class="s3">&quot;Arial&quot;</span><span class="s2">, </span><span class="s1">Font</span><span class="s2">.</span><span class="s1">PLAIN</span><span class="s2">, </span><span class="s4">16</span><span class="s2">));</span>
+        <span class="s1">frame</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">importButton</span><span class="s2">);</span>
+        <span class="s1">selectedFileName </span><span class="s2">= </span><span class="s3">&quot;&quot;</span><span class="s2">;</span>
+
+    <span class="s1">importButton</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">ActionListener</span><span class="s2">() {</span>
+        <span class="s1">@Override</span>
+        <span class="s0">public void </span><span class="s1">actionPerformed</span><span class="s2">(</span><span class="s1">ActionEvent e</span><span class="s2">) {</span>
+             <span class="s1">filechooser </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JFileChooser</span><span class="s2">(</span><span class="s1">System</span><span class="s2">.</span><span class="s1">getProperty</span><span class="s2">(</span><span class="s3">&quot;user.home&quot;</span><span class="s2">) + </span><span class="s3">&quot;/Desktop/&quot;</span><span class="s2">);</span>
+            <span class="s1">filechooser</span><span class="s2">.</span><span class="s1">setDialogTitle</span><span class="s2">(</span><span class="s3">&quot;Select your AVI File&quot;</span><span class="s2">);</span>
+
+             <span class="s1">filter </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FileNameExtensionFilter</span><span class="s2">(</span><span class="s3">&quot;Video Files&quot;</span><span class="s2">, </span><span class="s3">&quot;avi&quot;</span><span class="s2">);</span>
+            <span class="s1">filechooser</span><span class="s2">.</span><span class="s1">setFileFilter</span><span class="s2">(</span><span class="s1">filter</span><span class="s2">);</span>
+
+            <span class="s0">int </span><span class="s1">result </span><span class="s2">= </span><span class="s1">filechooser</span><span class="s2">.</span><span class="s1">showOpenDialog</span><span class="s2">(</span><span class="s1">frame</span><span class="s2">);</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">result </span><span class="s2">== </span><span class="s1">JFileChooser</span><span class="s2">.</span><span class="s1">APPROVE_OPTION</span><span class="s2">) {</span>
+                <span class="s1">selectedFile </span><span class="s2">= </span><span class="s1">filechooser</span><span class="s2">.</span><span class="s1">getSelectedFile</span><span class="s2">();</span>
+
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">selectedFile</span><span class="s2">.</span><span class="s1">getName</span><span class="s2">().</span><span class="s1">toLowerCase</span><span class="s2">().</span><span class="s1">endsWith</span><span class="s2">(</span><span class="s3">&quot;avi&quot;</span><span class="s2">)) {</span>
+                    <span class="s1">selectedFileName </span><span class="s2">= </span><span class="s1">selectedFile</span><span class="s2">.</span><span class="s1">getAbsolutePath</span><span class="s2">();</span>
+                    <span class="s1">HasVideo</span><span class="s2">=</span><span class="s0">true</span><span class="s2">;</span>
+                    <span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showMessageDialog</span><span class="s2">(</span><span class="s1">frame</span><span class="s2">, </span><span class="s3">&quot;File imported successfully:</span><span class="s0">\n</span><span class="s3">&quot; </span><span class="s2">+ </span><span class="s1">selectedFile</span><span class="s2">.</span><span class="s1">getAbsolutePath</span><span class="s2">()+</span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">Allow the software to convert video to greyscale.&quot;</span><span class="s2">);</span>
+                    <span class="s1">frame</span><span class="s2">.</span><span class="s1">dispose</span><span class="s2">();</span>
+                <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                    <span class="s1">HasVideo</span><span class="s2">=</span><span class="s0">false</span><span class="s2">;</span>
+                    <span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showMessageDialog</span><span class="s2">(</span><span class="s1">frame</span><span class="s2">, </span><span class="s3">&quot;Invalid file type. Please select an AVI file.&quot;</span><span class="s2">, </span><span class="s3">&quot;Error&quot;</span><span class="s2">, </span><span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">ERROR_MESSAGE</span><span class="s2">);</span>
+                <span class="s2">}</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s1">HasVideo</span><span class="s2">=</span><span class="s0">false</span><span class="s2">;</span>
+                <span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showMessageDialog</span><span class="s2">(</span><span class="s1">frame</span><span class="s2">, </span><span class="s3">&quot;No file selected.&quot;</span><span class="s2">, </span><span class="s3">&quot;Warning&quot;</span><span class="s2">, </span><span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">WARNING_MESSAGE</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">});</span>
+
+    <span class="s1">frame</span><span class="s2">.</span><span class="s1">setLocationRelativeTo</span><span class="s2">(</span><span class="s0">null</span><span class="s2">);</span>
+    <span class="s1">frame</span><span class="s2">.</span><span class="s1">setVisible</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);}</span>
+
+
+    <span class="s0">public boolean </span><span class="s1">hasVideo</span><span class="s2">()</span>
+    <span class="s2">{</span>
+        <span class="s0">return </span><span class="s1">HasVideo</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String getFilePath</span><span class="s2">() {</span>
+        <span class="s0">if </span><span class="s2">(!</span><span class="s1">HasVideo </span><span class="s2">|| </span><span class="s1">selectedFileName</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+            <span class="s0">throw new </span><span class="s1">IllegalStateException</span><span class="s2">(</span><span class="s3">&quot;No valid video file selected.&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">selectedFileName</span><span class="s2">;</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
