@@ -4,7 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a87743a-8ea1-4538-ac4c-b8740f5aa29e" name="Changes" comment="Initial Commit" />
+    <list default="true" id="0a87743a-8ea1-4538-ac4c-b8740f5aa29e" name="Changes" comment="i dont know but this should fix some lagging -mateo">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZhuIACode02:09:25/Cell.java.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZhuIACode02:09:25/Grapher.java.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZhuIACode02:09:25/IdentifyCell.java.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZhuIACode02:09:25/IdentifyOscillations.java.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZhuIACode02:09:25/JavaToPythonVideoPlayer.java.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZhuIACode02:09:25/Main.java.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZhuIACode02:09:25/PlayVid.java.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZhuIACode02:09:25/Video.java.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZhuIACode02:09:25/VideoImporter.java.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZhuIACode02:09:25/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output_video.avi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Zhu12:19:24Code.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/Frame.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/JavaToPythonVideoPlayer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/OpenCVTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/VideoImporter$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/VideoImporter.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -146,7 +166,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747167645456</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="i dont know but this should fix some lagging -mateo">
+      <option name="closed" value="true" />
+      <created>1747171370976</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1747171370976</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,7 +193,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial Commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial Commit" />
+    <MESSAGE value="i dont know but this should fix some lagging -mateo" />
+    <option name="LAST_COMMIT_MESSAGE" value="i dont know but this should fix some lagging -mateo" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
